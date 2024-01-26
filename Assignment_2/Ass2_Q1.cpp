@@ -32,7 +32,7 @@ void PrintData(StudInfo a[],int n){
 
 int main(){
     int n;
-    cout<<"Number of student"<<endl;
+    cout<<"Number of student 2"<<endl;
     cin>>n;
 
     StudInfo a[n];
