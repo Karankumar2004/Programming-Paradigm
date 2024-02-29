@@ -19,7 +19,7 @@ public:
             arr = nullptr;
             top = -1;
         }
-        
+
         max_size = size;
         arr = new int[size];
         top=-1;
@@ -150,7 +150,7 @@ int main(){
     cout<<"\nNo. of Stack: "<<MyStack::getCount()<<endl;
 */
     cout<<"\nStack-3: ";
-    MyStack s3 = s1+s2;
+    MyStack s3 = (s1+s2);
     for(int i=0;i<8;i++){
     cout<<s3.Top()<<"  ";
     s3.Pop();
