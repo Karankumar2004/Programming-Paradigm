@@ -8,10 +8,18 @@ private:
     int *arr;
     int top; //Accessing this in the main that's it is in the public
     static int count; //Static why?? //ek hi copy har jagah share hoga
+    static const int Max_Stack = 5;
 public:
     
     //Making Constructor
     MyStack(int size){
+        if(count>= Max_Stack){
+            cout<<"Maximum limit reached"<<endl;
+            max_size = 0;
+            arr = nullptr;
+            top = -1;
+        }
+        
         max_size = size;
         arr = new int[size];
         top=-1;
@@ -27,6 +35,22 @@ public:
         }
         top = A.top;
         count++;
+    }
+
+    //Operator overloading
+    MyStack operator+(const MyStack &st){
+        MyStack st_3(max_size + st.max_size); //Making the size of resultant stack is the sum two stack
+        
+        //Pushing the elements of first stack into result stack
+        for(int i=0;i<=top;i++){
+            st_3.Push(arr[i]);
+        }
+
+        //Pushing the elements of second stack into result stack
+        for(int i=0; i<=st.top;i++){
+            st_3.Push(st.arr[i]);
+        }
+        return st_3;
     }
     
     int Push(int a)
@@ -105,14 +129,16 @@ int main(){
     cout<<"\nNo. of Stack: "<<MyStack::getCount()<<endl;
 
    /**********Copy Constructor************/
+   cout<<"\nStack-2: ";
    MyStack s2 = s1;
    for(int i=0;i<4;i++){
-    s2.Top();
+    cout<<s2.Top()<<"  ";
     s2.Pop();
    }
    cout<<"\nNo. of Stack: "<<MyStack::getCount()<<endl;
+
    /**********Assignement Operator************/
-   MyStack s3(4);
+ /*  MyStack s3(4);
    for(int i=3;i>=0;i--){
     s3.Push(s1.Top());
     s1.Pop();
@@ -121,7 +147,16 @@ int main(){
     cout<<s3.Top()<<"  ";
     s3.Pop();
    }
-cout<<"\nNo. of Stack: "<<MyStack::getCount()<<endl;
+    cout<<"\nNo. of Stack: "<<MyStack::getCount()<<endl;
+*/
+    cout<<"\nStack-3: ";
+    MyStack s3 = s1+s2;
+    for(int i=0;i<8;i++){
+    cout<<s3.Top()<<"  ";
+    s3.Pop();
+   }
+
+
 
     return 0;
 }
