@@ -14,7 +14,7 @@ public:
     MyStack(int size)
     {
         max_size = size;
-        arr = new int[size];
+        arr = new T[size];
         top = -1;
     }
 
@@ -22,7 +22,7 @@ public:
     MyStack(MyStack &A)
     {
         max_size = A.max_size;
-        arr = new int[A.max_size]; // Dynamically allocating the same size of memory as A
+        arr = new T[A.max_size]; // Dynamically allocating the same size of memory as A
         for (int i = 0; i < max_size; i++)
         {
             arr[i] = A.arr[i]; // Copying the value
@@ -87,7 +87,6 @@ int main()
     cout << "Enter the stack value\n";
     for (int i = 0; i < n1; i++)
     { // Pushing the value into the stack
-        cout << "\n check \n";
         int val;
         // float val;
         // string val;
@@ -108,8 +107,6 @@ int main()
 
     cout << "\nSize of stack: " << s1.CurrentSize();
     s1.IsEmpty();
-
-
 
     /**********Copy Constructor************/
     /* MyStack<int> s2 = s1;

@@ -49,6 +49,26 @@ public:
         }
     }
 
+    void push_comp(List &li, int coeff, int exp)
+    {
+        node *temp = li.head;
+        bool flag = true;
+
+        while (temp != NULL)
+        {
+            if (exp == temp->exponent)
+            {
+                temp->coefficient = temp->coefficient + coeff;
+                flag = false;
+            }
+            temp = temp->next;
+        }
+
+        if (flag == true)
+        {
+            push(coeff, exp);
+        }
+    }
     // For printing the polynomial
     void show()
     {
@@ -113,6 +133,20 @@ public:
 
 int main()
 {
+    List l1;
+
+    for (int i = 0; i < 5; i++)
+    {
+        int power;
+        cout << "Enter power";
+        cin >> power;
+        int coeff;
+        cout << "Enter Coefficient";
+        cin >> coeff;
+        l1.push_comp(l1, coeff, power);
+    }
+    l1.show();
+    /*
     List l1, l2;
     l1.push(2, 3);          // 2x^3
     l1.push(1, 2);          // x^2
@@ -130,6 +164,6 @@ int main()
     List l3 = l1 + l2;
     cout << "Sum of two equation: ";
     l3.show();
-
+*/
     return 0;
 }
