@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 using namespace std;
 
 class Set
@@ -169,6 +170,80 @@ public:
         return true;
     }
 
+    // Cartesian product of two sets
+    void cartesianProduct(const Set &other)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < other.size; j++)
+            { // Just doing one thing taking one element from first set and traverse 2nd set
+                cout << "(" << arr[i] << ", " << other.arr[j] << ")" << endl;
+            }
+        }
+        cout << endl;
+    }
+
+    // Power Set
+    /*void powerSet(){
+        int n =
+    }*/
+
+    // Mean
+    int mean()
+    {
+        int sum = 0;
+        for (int i = 0; i < size; i++)
+        {
+            sum += arr[i];
+        }
+        sum /= size;
+        return sum;
+    }
+
+    // Varience
+    int varience()
+    {
+        int meaans = mean();
+        int var = 0;
+        for (int i = 0; i < size; i++)
+        {
+            var += pow(arr[i] - meaans, 2);
+        }
+        return var / size;
+    }
+
+    // Standard Deviation
+    int stdDeviation()
+    {
+        return sqrt(varience());
+    }
+
+    // Median
+    int median()
+    {
+        // Sorting
+        for (int i = 0; i < size; i++)
+        {
+            for (int j = 0; j < i; j++)
+            {
+                if (arr[i] > arr[j])
+                {
+                    swap(arr[i], arr[j]);
+                }
+            }
+        }
+        // Now finding median
+        int n = size;
+        // Case1
+        if (n % 2 == 0)
+        {
+            return (arr[n / 2 - 1] + arr[n / 2]) / 2;
+        }
+        else
+        { // Case-2
+            return arr[n / 2];
+        }
+    }
     // For displaying the Set
     void show()
     {
@@ -225,5 +300,20 @@ int main()
     bool Equal = set1.isEqual(set2);
     cout << "Set1 and Set are equal ? " << (Equal ? "Yes" : "No") << "\n";
 
+    // cartesian Product
+    cout << "Cartesian Prodcut\n";
+    set1.cartesianProduct(set2);
+
+    // Mean
+    cout << "Mean: " << set1.mean() << endl;
+
+    // Varience
+    cout << "Varience: " << set1.varience() << endl;
+
+    // Std Deviation
+    cout << "Standard Deviation: " << set1.stdDeviation() << endl;
+
+    // Median
+    cout << "Median: " << set1.median() << endl;
     return 0;
 }

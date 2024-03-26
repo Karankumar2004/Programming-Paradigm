@@ -131,7 +131,7 @@ int main()
     stack1.show();
 
     MyStack stack2(3);
-    stack2.Push(75);
+    stack2.Push(75);    
     stack2.Push(25);
     stack2.Push(85);
     stack2.show();

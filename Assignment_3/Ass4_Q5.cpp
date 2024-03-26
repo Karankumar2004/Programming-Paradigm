@@ -64,6 +64,7 @@ public:
             temp = temp->next;
         }
 
+        // Agar uss power ka nhi mila
         if (flag == true)
         {
             push(coeff, exp);
