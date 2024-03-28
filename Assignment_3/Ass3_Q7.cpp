@@ -48,12 +48,12 @@ public:
     }
 
     // Getter
-    int getValue(int row, int col, int data)
+    int getValue(int row, int col)
     {
         if (row < 0 || row >= rows || col < 0 || col >= cols)
         {
             cout << "Invalid Matrix Index";
-            return;
+            return -1;
         }
         return arr[row][col];
     }
@@ -63,8 +63,9 @@ public:
     {
         if (rows != other.rows || cols != other.cols)
         {
-            cout << "Matrices have not same dimension\n";
-            return;
+            // cout << "Matrices have not same dimension\n";
+            // return;
+            throw("Matrices have not same dimension\n");
         }
 
         Matrix res(rows, cols);
@@ -83,8 +84,9 @@ public:
     {
         if (rows != other.rows || cols != other.cols)
         {
-            cout << "Matrices have not same dimension\n";
-            return;
+            // cout << "Matrices have not same dimension\n";
+            // return;
+            throw("Matrices have not same dimension\n");
         }
 
         Matrix res(rows, cols);
@@ -136,13 +138,37 @@ public:
         return res;
     }
 
+    // SubMatrix
+    Matrix subMatrix(int s_row, int s_col, int e_row, int e_col)
+    {
+        if (s_row < 0 || s_col < 0 || e_row >= rows || e_col >= cols ||
+            s_row > e_row || s_col > e_col)
+        {
+            throw("Invalid subMatrix dimensions");
+        }
+        // size of subMatrix
+        int sub_row = e_row - s_row + 1; // row of submatrix
+        int sub_col = e_col - s_col + 1; // col of submatrix
+        Matrix matrix(sub_row, sub_col);
+        for (int i = 0; i < sub_row; i++)
+        {
+            for (int j = 0; j < sub_col; j++)
+            {
+                matrix.setValue(i, j, arr[s_row + i][s_col + j]);
+            }
+        }
+        return matrix;
+    }
+
+    // Inverse
+
     void show()
     {
-        for (int i = 0; i < rows; ++i)
+        for (int i = 0; i < rows; i++)
         {
-            for (int j = 0; j < cols; ++j)
+            for (int j = 0; j < cols; j++)
             {
-                cout << arr[i][j] << " ";
+                cout << getValue(i, j) << " ";
             }
             cout << std::endl;
         }
@@ -150,17 +176,20 @@ public:
 };
 int main()
 {
-    Matrix mat1(2, 2);
-    mat1.setValue(0, 0, 1);
-    mat1.setValue(0, 1, 2);
-    mat1.setValue(1, 0, 3);
-    mat1.setValue(1, 1, 4);
+    Matrix A(2, 2);
+    A.setValue(0, 0, 1);
+    A.setValue(0, 1, 2);
+    A.setValue(1, 0, 3);
+    A.setValue(1, 1, 4);
 
-    Matrix mat2(2, 2);
-    mat2.setValue(0, 0, 5);
-    mat2.setValue(0, 1, 6);
-    mat2.setValue(1, 0, 7);
-    mat2.setValue(1, 1, 8);
+    Matrix B(2, 2);
+    B.setValue(0, 0, 5);
+    B.setValue(0, 1, 6);
+    B.setValue(1, 0, 7);
+    B.setValue(1, 1, 8);
 
-        return 0;
+    cout << "Matrix A" << endl;
+    A.show();
+
+    return 0;
 }
