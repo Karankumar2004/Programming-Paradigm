@@ -79,7 +79,7 @@ public:
 
     // Copy Construtor
     Car(const Car &other)
-        : Vehicle(other) // Used to initialize the suboject of baseclass
+        : Vehicle(other) // Used to initialize the sub-object of baseclass
     {
         color = other.color;
         NumberOfSeats = other.NumberOfSeats;

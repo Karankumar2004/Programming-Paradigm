@@ -2,14 +2,14 @@
 #include <cmath>
 #include <vector>
 
-using namespace std;
-
+// Base class Shape
 class Shape
 {
 public:
-    virtual double area() const = 0;
+    virtual double area() const = 0; // Pure virtual function for calculating area
 };
 
+// Triangle class
 class Triangle : public Shape
 {
 private:
@@ -17,14 +17,16 @@ private:
     double height;
 
 public:
-    Triangle(double base, double height) : base(base), height(height) {}
+    Triangle(double b, double h) : base(b), height(h) {}
 
+    // Calculate area of the triangle
     double area() const override
     {
         return 0.5 * base * height;
     }
 };
 
+// Rectangle class
 class Rectangle : public Shape
 {
 private:
@@ -32,66 +34,50 @@ private:
     double width;
 
 public:
-    Rectangle(double length, double width) : length(length), width(width) {}
+    Rectangle(double l, double w) : length(l), width(w) {}
 
+    // Calculate area of the rectangle
     double area() const override
     {
         return length * width;
     }
 };
 
+// Circle class
 class Circle : public Shape
 {
 private:
     double radius;
 
 public:
-    Circle(double radius) : radius(radius) {}
+    Circle(double r) : radius(r) {}
 
+    // Calculate area of the circle
     double area() const override
     {
         return M_PI * radius * radius;
     }
 };
 
-class ShapeManager
-{
-private:
-    vector<Shape *> shapes;
-
-public:
-    void addShape(Shape *shape)
-    {
-        shapes.push_back(shape);
-    }
-
-    double getTotalArea() const
-    {
-        double totalArea = 0.0;
-        for (const auto &shape : shapes)
-        {
-            totalArea += shape->area();
-        }
-        return totalArea;
-    }
-};
-
 int main()
 {
-    ShapeManager manager;
+    // List of shapes
+    std::vector<Shape *> shapes = {
+        new Triangle(6, 8),
+        new Rectangle(3, 10),
+        new Circle(5)};
 
-    // Add some shapes
-    manager.addShape(new Triangle(5, 8));
-    manager.addShape(new Rectangle(4, 6));
-    manager.addShape(new Circle(3));
+    // Calculate total area covered by all shapes
+    double total_area = 0;
+    for (const auto &shape : shapes)
+    {
+        total_area += shape->area();
+    }
 
-    // Calculate total area
-    double totalArea = manager.getTotalArea();
+    std::cout << "Total area covered by all shapes: " << total_area << std::endl;
 
-    cout << "Total area covered by the shapes: " << totalArea << endl;
-
-    // Free the memory
-    for (const auto &shape : manager)
+    // Clean up dynamic memory
+    for (const auto &shape : shapes)
     {
         delete shape;
     }

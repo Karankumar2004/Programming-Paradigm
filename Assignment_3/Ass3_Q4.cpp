@@ -45,7 +45,7 @@ public:
     // Operator overloading
     MyStack operator+(const MyStack &st)
     {
-        MyStack st_3(max_size + st.max_size); // Making the size of resultant stack is the sum two stack
+        MyStack st_3(max_size + st.max_size); // Making the size of resultant stack is the sum of two stack
 
         // Pushing the elements of first stack into result stack
         for (int i = 0; i <= top; i++)
@@ -131,7 +131,7 @@ int main()
     stack1.show();
 
     MyStack stack2(3);
-    stack2.Push(75);    
+    stack2.Push(75);
     stack2.Push(25);
     stack2.Push(85);
     stack2.show();
